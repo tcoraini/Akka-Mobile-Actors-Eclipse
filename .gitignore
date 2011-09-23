@@ -1,0 +1,8 @@
+bin
+memory-dumps
+thread-dumps
+logs
+.classpath
+.project
+.scala_dependencies
+.settings/

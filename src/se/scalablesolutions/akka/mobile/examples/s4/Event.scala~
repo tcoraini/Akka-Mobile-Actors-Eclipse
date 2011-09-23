@@ -1,0 +1,10 @@
+package se.scalablesolutions.akka.mobile.examples.s4
+
+trait Event[A, B] {
+  
+  val key: A
+  val attribute: B
+  
+  private[s4] def uniqueName: String = this.getClass.getName + "_KEY:" + key
+
+}

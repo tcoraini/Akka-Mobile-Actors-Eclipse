@@ -1,0 +1,3 @@
+package se.scalablesolutions.akka.mobile.examples.s4.wordcount
+
+import se.scalablesolutions.akka.mobile.examples.s4.Ev
