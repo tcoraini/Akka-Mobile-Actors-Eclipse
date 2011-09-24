@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <project basedir="." default="build" name="mobile-actors-eclipse">
     <property name="debuglevel" value="source,lines,vars"/>
@@ -46,7 +46,12 @@
 	<arg value="${node_name}" />
       </java>
     </target>
-	
+
+    <target name="migrationTime">
+      <java fork="true" classname="apps.MigrationTime" classpathref="Akka.classpath">
+	<arg value="${nbytes}" />
+      </java>
+    </target>
 
     <target name="clean">
         <delete dir="bin"/>

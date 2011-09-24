@@ -1,6 +1,6 @@
 #!/bin/bash
 
-node=node_1
+node=node_2
 if [ $# -eq 1 ]; then
     node=$1
 fi

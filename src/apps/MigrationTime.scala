@@ -3,6 +3,7 @@ package apps
 import se.scalablesolutions.akka.mobile.actor.MobileActor
 import se.scalablesolutions.akka.mobile.util.messages._
 import se.scalablesolutions.akka.mobile.util.DefaultLogger
+import se.scalablesolutions.akka.mobile.util.ClusterConfiguration
 import se.scalablesolutions.akka.mobile.Mobile
 
 import java.util.Date
@@ -37,6 +38,7 @@ object MigrationTime {
     Mobile.startTheater("node_1")
     val nBytes = args(0).toInt
     val actor = Mobile.spawn(new MigrationTimeMeasurer(nBytes)).here
-    actor ! MoveTo("node_2", 1810)
+    val destination = ClusterConfiguration.nodes.get("node_2").getOrElse(throw new RuntimeException("Não existe um nó chamado 'node_2'"));
+    actor ! MoveTo(destination.node.hostname, destination.node.port)
   }
 }
