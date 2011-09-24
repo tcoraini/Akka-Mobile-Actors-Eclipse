@@ -1,9 +1,13 @@
 #!/bin/bash
 
-generated_file=$2
-list_of_nodes=`grep '[^ ]' $1 | grep -v \#`
+file=nodes.txt
+if [ $# -gt 0 ]; then
+    file=$1
+fi
 
-number_of_nodes=`grep '[^ ]' $1 | grep -v \# | wc -l`
+list_of_nodes=`grep '[^ ]' $file | grep -v \#`
+
+number_of_nodes=`grep '[^ ]' $file | grep -v \# | wc -l`
 
 echo -e "cluster {\n"
 echo -e -n "\tnodes = [ \"node_1\""
