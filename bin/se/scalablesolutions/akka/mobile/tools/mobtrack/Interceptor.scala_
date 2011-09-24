@@ -1,0 +1,29 @@
+package se.scalablesolutions.akka.mobile.tools.visualization
+
+import se.scalablesolutions.akka.mobile.nameservice.NameService
+import se.scalablesolutions.akka.mobile.theater.TheaterNode
+
+trait Interceptor extends NameService {
+  
+  abstract override def put(uuid: String, node: TheaterNode): Unit = {
+    get(uuid) match {
+      case Some(origin) =>
+	VisualizationTool.migrate(uuid, origin, node)
+      
+      case None =>
+	println("[Interceptor] Arriving actor " + uuid + " at " + node + " in the visualization tool")
+	VisualizationTool.arrive(uuid, node)
+    }
+    super.put(uuid, node)
+  }
+  
+  abstract override def remove(uuid: String): Unit = {
+    get(uuid) match {
+      case Some(node) =>
+	VisualizationTool.depart(uuid, node)
+      
+      case None => ()
+    }
+    super.remove(uuid)
+  }
+}

@@ -1,0 +1,12 @@
+package se.scalablesolutions.akka.mobile.examples.s4.wordcount
+
+import se.scalablesolutions.akka.mobile.examples.s4.ProcessingElement
+
+import scala.collection.mutable.Ha
+
+@serializable class SortPE extends ProcessingElement[UpdateCountEvent] {
+  private val words = new HashMap[String, Int]
+  
+  def process(event: UpdateCountEvent) = {
+    
+}

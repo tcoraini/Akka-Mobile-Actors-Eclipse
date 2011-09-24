@@ -1,0 +1,82 @@
+package mobile;
+
+option java_package = "se.scalablesolutions.akka.mobile.theater.protocol.protobuf";
+
+message TheaterMessageProtocol {
+  required TheaterMessageType messageType = 1;
+  required TheaterNodeProtocol sender = 2;
+  
+  // Possible messages
+  optional MovingActorProtocol movingActor = 3;
+  optional MovingGroupProtocol movingGroup = 4;
+  optional MobileActorsRegisteredProtocol mobileActorsRegistered = 5;
+  optional StartActorRequestProtocol startActorRequest = 6;
+  optional StartActorReplyProtocol startActorReply = 7;
+  optional StartColocatedActorsRequestProtocol startColocatedActorsRequest = 8;
+  optional StartColocatedActorsReplyProtocol startColocatedActorsReply = 9;
+  optional ActorNewLocationNotificationProtocol actorNewLocationNotification = 10;
+}
+
+message MovingActorProtocol {
+  required bytes actorBytes = 1;
+}
+
+message MovingGroupProtocol {
+  repeated bytes actorsBytes = 1;
+  optional string nextTo = 2; 
+}
+
+message MobileActorsRegisteredProtocol {
+  repeated string uuids = 1;
+}
+
+message StartActorRequestProtocol {
+  required uint64 requestId = 1;
+  required string className = 2;
+}
+
+message StartActorReplyProtocol {
+  required uint64 requestId = 1;
+  required string actorUuid = 2;
+}
+
+message StartColocatedActorsRequestProtocol {
+  required uint64 requestId = 1;
+  required string className = 2;
+  required int32 number = 3;
+  optional string nextTo = 4;
+}
+
+message StartColocatedActorsReplyProtocol {
+  required uint64 requestId = 1;
+  repeated string uuids = 2;
+}
+
+message ActorNewLocationNotificationProtocol {
+  required string uuid = 1;
+  required string hostname = 2;
+  required int32 port = 3;
+  //required TheaterNodeProtocol newNode = 2;
+}
+
+message TheaterNodeProtocol {
+  required string hostname = 1;
+  required int32 port = 2;
+}
+
+enum TheaterMessageType {
+  MOVING_ACTOR = 1;
+  MOVING_GROUP = 2;
+  MOBILE_ACTORS_REGISTERED = 3;
+  START_ACTOR_REQUEST = 4;
+  START_ACTOR_REPLY = 5;
+  START_COLOCATED_ACTORS_REQUEST = 6;
+  START_COLOCATED_ACTORS_REPLY = 7;
+  ACTOR_NEW_LOCATION_NOTIFICATION = 8;
+} 
+
+enum ConstructorType {
+  CLASSNAME = 1;
+  BYTES = 2;
+}
+

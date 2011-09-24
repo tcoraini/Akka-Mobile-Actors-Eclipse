@@ -1,0 +1,44 @@
+package se.scalablesolutions.akka.mobile.examples.s4
+
+import se.scalablesolutions.akka.mobile.actor.MobileActor
+
+case class StartPEFor[T <: Event[_, _]](eventPrototype: T)
+
+@serializable abstract class ProcessingElement[T <: Event[_, _] : Manifest] extends MobileActor {
+  
+  private var _isRunning = false
+  def isRunning = _isRn
+  
+  protected var eventPrototype: T = _
+
+  val eventClass = manifest[T].erasure.asInstanceOf[Class[_ <: Event[_, _]]]
+
+  lazy val key = eventPrototype.key
+  
+  protected def start(prototype: T) = {
+    eventPrototype = prototype
+    self.uuid = eventPrototype.uniqueName
+    isRunning = true
+  }
+
+  def receive = {
+    if (!isRunning) {
+      case StartPEFor(prototype) if prototype.getClass == eventClass => start(prototype.asInstanceOf[T])
+    } else {
+      case event: T if event.key == key => process(event)
+      
+      case event: Event[_, _] => log.warning("Processing element received an Event with an incompatible key: " + event)
+      
+      case msg => log.warning("Processing element received an unknown message: " + msg)
+    }
+  }
+
+  override def
+  
+  protected def emit(event: Event[_, _]): Unit = {
+    S4.dispatch(event)
+  }
+  
+  def process(event: T): Unit
+  
+}

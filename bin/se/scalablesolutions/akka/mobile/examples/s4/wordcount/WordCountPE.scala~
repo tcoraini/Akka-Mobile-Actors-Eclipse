@@ -1,0 +1,11 @@
+package se.scalablesolutions.akka.mobile.examples.s4.wordcount
+
+import se.scalablesolutions.akka.mobile.examples.s4.ProcessingElement
+
+//@serializable class WordCountPE(eventPrototype: WordEvent) extends ProcessingElement(eventPrototype) {
+@serializable class WordCountPE extends ProcessingElement[WordEvent] {
+
+  def process(event: WordEvent) {
+    println("Recebido evento com chave " + key + " (" + event.key + ") e valor " + event.attribute)
+  }
+}

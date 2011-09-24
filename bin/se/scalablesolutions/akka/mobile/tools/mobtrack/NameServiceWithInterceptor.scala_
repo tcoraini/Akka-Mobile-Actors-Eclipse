@@ -1,0 +1,5 @@
+package se.scalablesolutions.akka.mobile.tools.visualization
+
+import se.scalablesolutions.akka.mobile.nameservice.DistributedNameService
+
+class NameServiceWithInterceptor extends DistributedNameService with Interceptor

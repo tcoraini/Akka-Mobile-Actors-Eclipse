@@ -7,8 +7,11 @@ import se.scalablesolutions.akka.mobile.Mobile
 
 import java.util.Date
 
-class MigrationTimeMeasurer extends MobileActor {
+class MigrationTimeMeasurer(nBytes: Int) extends MobileActor {
   private var beforeTimestamp: Long = _
+
+  private val load = new Array[Byte](nBytes)
+  println("Construído com " + nBytes + " bytes.")
 
   def receive = {
     case any =>
@@ -16,13 +19,15 @@ class MigrationTimeMeasurer extends MobileActor {
   }
 
   override def beforeMigration() {
-    beforeTimestamp = (new Date).getTime
+    println("Iniciando migração com " + load.length + " bytes.")
+    beforeTimestamp = System.currentTimeMillis()
   }
 
   override def afterMigration() {
-    val afterTimestamp = (new Date).getTime
+    val afterTimestamp = System.currentTimeMillis()
     val elapsed = afterTimestamp - beforeTimestamp
-    DefaultLogger.info("Tempo decorrido da migração: %s ms", elapsed)
+    println("Migração concluída com " + load.length + " bytes.");
+    println("Tempo total: " + elapsed + " ms");
   }
 
 }
@@ -30,10 +35,8 @@ class MigrationTimeMeasurer extends MobileActor {
 object MigrationTime {
   def main(args: Array[String]) {
     Mobile.startTheater("node_1")
-    val actor = Mobile.spawn[MigrationTimeMeasurer].here
+    val nBytes = args(0).toInt
+    val actor = Mobile.spawn(new MigrationTimeMeasurer(nBytes)).here
     actor ! MoveTo("node_2", 1810)
-
-    val actor2 = Mobile.spawn[MigrationTimeMeasurer].here
-    actor2 ! MoveTo("node_2", 1810)
   }
 }

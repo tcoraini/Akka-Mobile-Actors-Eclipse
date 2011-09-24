@@ -1,0 +1,11 @@
+package se.scalablesolutions.akka.mobile.examples.s4.wordcount
+
+import se.scalablesolutions.akka.mobile.examples.s4.ProcessingElement
+
+@serializable class MergePE extends ProcessingElement[PartialTopKEvent] {
+  val words = new HashMap[String, Int]
+  
+  def process(event: PartialTopKEvent) = {
+    val listOfWords = event.attribute
+    listOfW
+}
