@@ -1,0 +1,7 @@
+boomer -> hunter (524288 bytes)
+
+meus atores: 4449 ms / 1628 ms
+
+atores SALSA: 1176 ms
+
+

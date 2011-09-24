@@ -1,0 +1,7 @@
+hunter
+smoker
+boomer
+charger
+spitter
+tank
+witch
