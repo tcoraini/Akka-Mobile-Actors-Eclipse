@@ -7,3 +7,4 @@ logs
 .scala_dependencies
 .settings/
 config/nodes.txt
+config/mobile-actors.conf
