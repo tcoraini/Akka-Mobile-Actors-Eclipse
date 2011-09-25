@@ -50,6 +50,14 @@
     <target name="migrationTime">
       <java fork="true" classname="apps.MigrationTime" classpathref="Akka.classpath">
 	<arg value="${nbytes}" />
+	<arg value="${nrounds}" />
+      </java>
+    </target>
+
+    <target name="travelTime">
+      <java fork="true" classname="apps.TravelTime" classpathref="Akka.classpath">
+	<arg value="${nbytes}" />
+	<arg value="${itinerary}" />
       </java>
     </target>
 

@@ -6,3 +6,4 @@ logs
 .project
 .scala_dependencies
 .settings/
+config/nodes.txt

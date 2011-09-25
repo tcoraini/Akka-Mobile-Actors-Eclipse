@@ -6,8 +6,6 @@ import se.scalablesolutions.akka.mobile.util.DefaultLogger
 import se.scalablesolutions.akka.mobile.util.ClusterConfiguration
 import se.scalablesolutions.akka.mobile.Mobile
 
-import java.util.Date
-
 class MigrationTimeMeasurer(nBytes: Int) extends MobileActor {
   private var beforeTimestamp: Long = _
 
@@ -37,8 +35,15 @@ object MigrationTime {
   def main(args: Array[String]) {
     Mobile.startTheater("node_1")
     val nBytes = args(0).toInt
-    val actor = Mobile.spawn(new MigrationTimeMeasurer(nBytes)).here
+
+    val rounds: Int =
+      if (args.length > 1) args(1).toInt
+      else 1
+
     val destination = ClusterConfiguration.nodes.get("node_2").getOrElse(throw new RuntimeException("Não existe um nó chamado 'node_2'"));
-    actor ! MoveTo(destination.node.hostname, destination.node.port)
+    for (i <- 1 to rounds) {
+      val actor = Mobile.spawn(new MigrationTimeMeasurer(nBytes)).here
+      actor ! MoveTo(destination.node.hostname, destination.node.port)
+    }
   }
 }
