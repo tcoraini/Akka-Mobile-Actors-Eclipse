@@ -149,7 +149,10 @@ object Armstrong extends Logging {
   }
 
   def main(args: Array[String]) {
-    val config = configure(args.toList)
+    val arguments: List[String] =
+      if (args.length == 1) args(0).split(' ').toList
+      else args.toList
+    val config = configure(arguments)
 
     val number = config.numActors
     val maxRounds = config.maxRounds

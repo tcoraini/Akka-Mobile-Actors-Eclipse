@@ -61,6 +61,12 @@
       </java>
     </target>
 
+    <target name="armstrong">
+      <java fork="true" classname="apps.Armstrong" classpathref="Akka.classpath">
+	<arg value="${arguments}" />
+      </java>
+    </target>
+
     <target name="clean">
         <delete dir="bin"/>
     </target>

@@ -1,0 +1,12 @@
+1. Colocar os nós participantes em nodes.txt
+
+2. Iniciar um teatro em cada um desses nós:
+   $ ./theater.sh <nome_do_nó>
+onde <nome_do_nó> é o nome, e NÃO O HOSTNAME. Sempre do tipo node_N
+
+3. Iniciar a aplicação com:
+   $ ./armstrong <N_ACTORS> [<BATCH_SIZE>] [<N_ROUNDS>]
+Valores default:
+  BATCH_SIZE: 1
+  N_ROUNDS: 3
+
