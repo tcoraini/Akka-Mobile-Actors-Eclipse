@@ -189,7 +189,7 @@ object Armstrong extends Logging {
       previous ! Next(first.uuid)
 
       logger.info("Esperando...")
-      //      System.in.read()
+      System.in.read()
       //            Thread.sleep(10000)
       logger.info("Começando...")
       first ! Start(maxRounds)
