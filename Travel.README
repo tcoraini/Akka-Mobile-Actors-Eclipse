@@ -6,6 +6,7 @@ onde <nome_do_nó> é o nome, e NÃO O HOSTNAME. Sempre do tipo node_N
 
 3. Colocar em itinerary.txt os nós por onde o ator deverá passar. 
 ATENÇÃO: Não colocar o nó inicial onde o ator será iniciado (que será o início e fim da viagem)
+ATENÇÃO: Colocar o NOME DO NÓ, e não seu hostname
 
 4. Iniciar o programa com:
    $ ./travel.sh <NBYTES> [<ARQUIVO_DE_ITINERARIO>]
